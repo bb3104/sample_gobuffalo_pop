@@ -1,0 +1,51 @@
+version: '3'
+services:
+  backend:
+    build: .
+    container_name: "sample_pop_backend"
+    hostname: sample_pop_backend
+    environment:
+      TZ: Asia/Tokyo
+      DATABASE_USER: user
+      DATABASE_PASS: pass
+      DATABASE_HOST: db-development
+      DATABASE_PORT: 3306
+    env_file: .env
+    volumes:
+      - .:/go/src/github.com/bb3104/sample_gobuffalo_pop
+    ports:
+      - '3001:3000'
+    tty: true
+    stdin_open: true
+    command: "go run server.go"
+    networks:
+      - sample_pop_network
+  db-development:
+    image: bitnami/mysql:5.7
+    container_name: "sample_pop_db-development"
+    environment:
+      ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_DATABASE: sample_pop_development
+      TZ: Asia/Tokyo
+    ports:
+      - '13306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - db-development-data:/bitnami/mysql/data
+      - ./mysql/custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro
+    networks:
+      - sample_pop_network
+volumes:
+  db-development-data:
+    driver: local
+  db-test-data:
+    driver: local
+
+networks:
+  sardine:
+    external:
+      name: sample_pop_network
+
