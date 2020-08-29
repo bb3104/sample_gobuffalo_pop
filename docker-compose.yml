@@ -45,7 +45,7 @@ volumes:
     driver: local
 
 networks:
-  sardine:
+  sample_pop_network:
     external:
       name: sample_pop_network
 
