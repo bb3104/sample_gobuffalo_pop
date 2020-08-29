@@ -1,7 +1,7 @@
 ---
 development:
   dialect: "mysql"
-  database: "sardine_development"
+  database: "sample_pop_development"
   host: "db-development"
   port: "3306"
   user: "user"
@@ -17,7 +17,7 @@ test:
   # Note that if you use `url`, other configurations are silently ignored.
   # In this case, the URL must contain all required connection parameters.
   #
-  database: "sardine_test"
+  database: "sample_pop_test"
   host: "localhost"
   port: "3306"
   user: "root"
@@ -30,7 +30,7 @@ production:
   #url: {{envOr "DATABASE_URL" "mysql://root:root@(localhost:3306)/sardine_production?parseTime=true&multiStatements=true&readTimeout=3s"}}
   #
   dialect: "mysql"
-  database: "sardine_production"
+  database: "sample_pop_production"
   host: {{envOr "DATABASE_HOST" "localhost"}}
   port: {{envOr "DATABASE_PORT" "3306"}}
   user: {{envOr "DATABASE_USER" "root"}}
